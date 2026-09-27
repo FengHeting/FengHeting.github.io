@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MicroFish Archive - 个人硬件收藏档案馆，展示个人收藏的各类电子硬件设备">
+<title>MicroFish Archive - 个人硬件收藏档案馆</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="page">
+
+  <!-- ======== 顶部横幅 ======== -->
+  <div id="banner">
+    <h1>MicroFish <span class="dot">•</span> Archive</h1>
+    <div class="subtitle">个人硬件收藏档案馆 · 不区分新旧贵贱，收藏即历史</div>
+  </div>
+
+  <!-- ======== 导航 ======== -->
+  <div id="nav">
+    <a href="index.html" class="nav-active">◈ 首页</a>
+    <a href="collection.html">◈ 全部藏品</a>
+    <a href="about.html">◈ 关于</a>
+  </div>
+
+  <!-- ======== 内容 ======== -->
+  <div id="content">
+
+    <div class="welcome">
+      <b>欢迎光临 MicroFish Archive。</b><br>
+      本站是一间纯粹的个人硬件收藏展示馆 —— 这里的每一台设备都是我实际收藏的藏品，
+      不区分新旧、贵贱、实用与否。收藏的重点是设备本身、它背后的历史，以及我自己的记录。
+      本站不卖任何东西，也不是评测网站。<br>
+      <span class="sig">—— 本站现收藏设备 <span id="device-count">0</span> 台，持续补充中。</span>
+    </div>
+
+    <div class="section-box">
+      <div class="sec-head">◆ 最新藏品</div>
+      <div class="sec-body" id="whatsnew">
+        <p style="text-align:center;color:#666666;">加载中…</p>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <div class="sec-head">◆ 藏品概览</div>
+      <div class="sec-body" style="text-align:center;">
+        <p>按设备大类陈列：微处理器、计算机 / 服务器、开发板 / 单板机、工业控制设备、
+        无线电设备、寻呼机、摄像机 / 影像设备、电子仪器、存储介质……</p>
+        <p><a class="enter-btn enter-inactive" href="collection.html">◈ 进入全部藏品目录 ◈</a></p>
+      </div>
+    </div>
+
+    <div class="section-box">
+      <div class="sec-head">◆ 关于本站</div>
+      <div class="sec-body">
+        <p>每一台藏品都记录着一段技术的历史。本站为纯收藏展示用途，页面文字由我本人撰写，
+        照片均为实物实拍。想要了解更多，或与我交流硬件收藏心得，请访问
+        <a href="about.html">关于页面</a>。</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ======== 页脚 ======== -->
+  <div id="footer">
+    <div class="foot-nav">
+      <a href="#top">返回顶部</a> |
+      <a href="collection.html">藏品目录</a> |
+      <a href="about.html">关于</a>
+    </div>
+    <div style="margin-top:6px;">
+      © 2026 MicroFish Archive · 个人硬件收藏展示馆 · 复古 Web 风格 · 建议使用 1024×768 及以上分辨率浏览
+    </div>
+    <div class="ticker">
+      <marquee behavior="scroll" direction="left" scrollamount="3">本站为个人收藏展示用途，非商业网站 · 欢迎交流硬件收藏心得 · 页面文字与照片均为实物实拍</marquee>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/common.js"></script>
+<script>
+/* 藏品数量统计 + 首页「最新藏品」列表（动态读取，无维护成本） */
+(function () {
+  fetch('data/devices.json', { cache: 'no-store' })
+    .then(function (r) { return r.json(); })
+    .then(function (slugs) {
+      var el = document.getElementById('device-count');
+      if (el) el.textContent = slugs.length;
+
+      /* 最新 3 台 = devices.json 末尾 3 项 */
+      var latest = slugs.slice(-3).reverse();
+      return Promise.all(latest.map(function (slug) {
+        return fetch('articles/' + encodeURIComponent(slug) + '.md', { cache: 'no-store' })
+          .then(function (r) { return r.text(); })
+          .then(function (txt) {
+            var f = window.MFA.parseMd(txt).fields;
+            return { slug: slug, name: f.name || slug, type: f.type || '' };
+          })
+          .catch(function () { return { slug: slug, name: slug, type: '' }; });
+      })).then(function (items) {
+        var box = document.getElementById('whatsnew');
+        if (!box) return;
+        box.innerHTML = '<ul class="plain">' + items.map(function (d) {
+          return '<li>『 ' + (d.type ? window.MFA.esc(d.type) + ' 』' : '') +
+            '<a href="device.html?slug=' + encodeURIComponent(d.slug) + '">' +
+            window.MFA.esc(d.name) + '</a></li>';
+        }).join('') + '</ul>';
+      });
+    })
+    .catch(function () {
+      var el = document.getElementById('device-count');
+      if (el) el.textContent = '—';
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,560 @@
+/* ============================================================
+   MicroFish Archive - 个人硬件收藏档案馆
+   复古 Web 风格样式表 (1999~2003)
+   字体 / 颜色 / 边框尽量贴近早期个人网站观感
+   ============================================================ */
+
+/* ---------- 全局 ---------- */
+* { box-sizing: border-box; }
+
+html {
+  /* 干净银灰纯色底（去掉点阵颗粒感，让底图干净透出） */
+  background: #C0C0C0;
+  background-attachment: fixed;
+}
+
+body {
+  margin: 0;
+  padding: 12px 0 24px 0;
+  color: #000000;
+  font-family: "SimSun", "宋体", "NSimSun", "Times New Roman", "MS Serif", serif;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+a { color: #0A60D0; }
+a:visited { color: #551A8B; }
+a:hover { color: #FF0000; }
+a img { border: 0; }
+
+/* ---------- 背景装饰图（固定视口，不随滚动、不平铺；位于背景纹理之上、前景内容之下） ---------- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url("../assets/img/img2.png") no-repeat center center / cover;
+  opacity: 0.1;
+}
+
+/* ---------- 页面骨架 ---------- */
+#page {
+  width: 900px;
+  max-width: 96%;
+  margin: 0 auto;
+  background: rgba(239, 239, 239, 0.5);  /* 顶层半透明，底图透出；图片不受影响 */
+  border: 2px outset #FFFFFF;
+  border-top-color: #808080;
+  border-left-color: #808080;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.25);
+  position: relative;
+  z-index: 1;   /* 前景内容压在底图之上 */
+}
+
+/* ---------- 顶部横幅 ---------- */
+#banner {
+  /* Mac OS X Aqua 液态深蓝渐变 + 顶部玻璃高光 */
+  background: #0A48C8;
+  background-image: linear-gradient(180deg,
+    rgba(255,255,255,0.42) 0%,
+    rgba(255,255,255,0.10) 12%,
+    rgba(255,255,255,0) 26%,
+    #3B82F6 34%,
+    #1D5FE0 55%,
+    #0A48C8 78%,
+    #073A94 100%);
+  border-bottom: 2px solid #808080;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), 0 2px 5px rgba(0,0,0,0.3);
+  padding: 14px 18px 12px 18px;
+  color: #FFFFFF;
+}
+#banner h1 {
+  margin: 0;
+  font-family: "SimHei", "黑体", "SimSun", "Times New Roman", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 #000000;
+}
+#banner h1 .dot { color: #FFFF00; }         /* 年代感黄色点缀 */
+#banner .subtitle {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #C0C0FF;
+  font-family: "SimHei", "黑体", "SimSun", "Times New Roman", sans-serif;
+}
+#banner .counter {
+  float: right;
+  margin-top: -6px;
+  text-align: right;
+  font-family: "Courier New", monospace;
+  font-size: 11px;
+  color: #FFFF66;
+  background: #000000;
+  border: 1px solid #808080;
+  padding: 3px 6px;
+}
+
+/* ---------- 导航条 ---------- */
+#nav {
+  background: #D4D0C8;
+  border-bottom: 2px solid #808080;
+  padding: 6px 10px;
+  text-align: center;
+  font-size: 13px;
+}
+#nav a {
+  display: inline-block;
+  margin: 2px 4px;
+  padding: 3px 14px;
+  text-decoration: none;
+  color: #000000;
+  background: #D4D0C8;
+  border: 2px outset #FFFFFF;          /* Win98 立体按钮 */
+  font-family: "SimSun", "宋体", "NSimSun", "Times New Roman", serif;
+}
+#nav a:hover {
+  background: #FFFFCC;
+  border-style: inset;
+  color: #000080;
+}
+#nav .nav-active {
+  background: linear-gradient(180deg, #6FB0FF 0%, #2E6FE0 45%, #0A48B0 55%, #0F55C8 100%);
+  color: #FFFFFF;
+  border: 1px solid #0A48C8;
+  border-radius: 4px;
+  font-weight: bold;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+/* ---------- 内容区 ---------- */
+#content {
+  padding: 16px 20px 20px 20px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #808080;
+  margin: 12px 14px;
+  min-height: 320px;
+}
+
+/* 内容标题 */
+h2 {
+  font-size: 17px;
+  color: #000080;
+  border-bottom: 1px solid #0A60D0;
+  padding-bottom: 4px;
+  margin: 18px 0 8px 0;
+}
+  border-bottom: 1px solid #808080;
+  padding-bottom: 3px;
+  margin: 18px 0 10px 0;
+  font-family: "SimHei", "黑体", "SimSun", "Times New Roman", sans-serif;
+}
+h2:first-child { margin-top: 4px; }
+h3 {
+  font-size: 14px;
+  color: #000080;
+  margin: 14px 0 6px 0;
+}
+h4 { font-size: 13px; margin: 10px 0 4px 0; }
+
+/* 欢迎区块 */
+.welcome {
+  background: rgba(255, 255, 225, 0.5);
+  border: 1px solid #CCCC99;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+.welcome .sig { color: #800000; font-family: "Times New Roman", "SimSun", serif; }
+
+/* 经典分隔线 */
+.divider {
+  border: 0;
+  height: 2px;
+  background: #808080;
+  margin: 16px 0;
+}
+.divider-dot {
+  border: 0;
+  height: 1px;
+  background-image: repeating-linear-gradient(90deg, #808080 0 4px, transparent 4px 8px);
+  margin: 12px 0;
+}
+
+/* ---------- 设备卡片网格 ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 10px 0;
+}
+.card {
+  /* Aqua 玻璃卡片：白→浅蓝渐变 + 圆角 + 顶部高光 */
+  background: linear-gradient(180deg, #FFFFFF 0%, #F2F8FF 55%, #DBEAFF 100%);
+  border: 1px solid #A9C6E8;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  color: #000000;
+  display: block;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.18), inset 0 1px 0 #FFFFFF;
+}
+.card:hover {
+  background: linear-gradient(180deg, #FFFFFF 0%, #E4F0FF 55%, #C4DFFF 100%);
+  border-color: #0A60D0;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.25), inset 0 1px 0 #FFFFFF;
+}
+.card .thumb {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border: 1px solid #8099B8;
+  border-radius: 4px;
+  background: #000000;
+  display: block;
+}
+.card .card-name {
+  margin-top: 6px;
+  font-weight: bold;
+  font-size: 13px;
+  color: #000080;
+  font-family: "SimHei", "黑体", "SimSun", "Times New Roman", sans-serif;
+}
+.card .card-brand { font-size: 12px; color: #333333; margin-top: 2px; }
+.card .card-model { font-size: 11px; color: #555555; font-family: "Courier New", monospace; }
+.card .card-type {
+  font-size: 11px;
+  color: #800000;
+  margin-top: 2px;
+}
+.card .card-status {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 10px;
+  color: #006600;
+  border: 1px solid #669966;
+  background: #EEFFEE;
+  padding: 0 4px;
+}
+.card .card-enter {
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 11px;
+  color: #0000CC;
+  text-decoration: underline;
+}
+
+/* ---------- 详情页 ---------- */
+.breadcrumb { font-size: 12px; color: #555555; margin-bottom: 8px; }
+.breadcrumb a { color: #0000CC; }
+
+.detail-title {
+  font-size: 22px;
+  color: #000080;
+  margin: 4px 0 2px 0;
+  font-family: "SimHei", "黑体", "SimSun", "Times New Roman", sans-serif;
+  font-weight: bold;
+}
+.detail-subtitle { font-size: 13px; color: #555555; margin-bottom: 12px; }
+
+.hero {
+  text-align: center;
+  margin: 12px 0;
+  padding: 10px;
+  background: #DDDDDD;
+  border: 1px solid #808080;
+}
+.hero img {
+  max-width: 100%;
+  max-height: 460px;
+  border: 3px solid #000000;
+  background: #000000;
+}
+.hero .caption { margin-top: 6px; font-size: 12px; color: #333333; }
+
+/* 公共备注（红色，显示在基本信息前） */
+.notes-box {
+  margin: 10px 0 4px 0;
+  padding: 6px 10px;
+  border: 1px solid #CC6666;
+  background: #FFF3F3;
+  color: #CC0000;
+  font-size: 12.5px;
+}
+.notes-label { font-weight: bold; }
+
+/* 信息表格 */
+.infotable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 6px 0 4px 0;
+  font-size: 12.5px;
+}
+.infotable th {
+  width: 130px;
+  background: #D4D0C8;
+  border: 1px solid #808080;
+  padding: 4px 8px;
+  text-align: left;
+  font-weight: normal;
+  color: #000080;
+  vertical-align: top;
+  font-family: "SimSun", "宋体", "NSimSun", "Times New Roman", serif;
+}
+.infotable td {
+  border: 1px solid #808080;
+  padding: 4px 8px;
+  background: #FFFFFF;
+  vertical-align: top;
+}
+.infotable .param-state {
+  font-size: 11px;
+  color: #336633;
+  font-family: "SimSun", "宋体", "NSimSun", "Times New Roman", serif;
+  white-space: nowrap;
+}
+.infotable tr.row-empty th {
+  color: #808080;
+  font-weight: normal;
+}
+.infotable .td-empty {
+  color: #A0A0A0;
+  font-style: italic;
+}
+
+.section-box {
+  margin: 14px 0;
+  border: 1px solid #808080;
+  background: rgba(255, 255, 255, 0.5);
+}
+.section-box .sec-head {
+  /* Aqua 蓝色标题条 */
+  background: linear-gradient(180deg, #6FB0FF 0%, #2E6FE0 45%, #0A48B0 55%, #0F55C8 100%);
+  color: #FFFFFF;
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: bold;
+  font-family: "SimHei", "黑体", "SimSun", "Times New Roman", sans-serif;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.45);
+  border-bottom: 1px solid #073A94;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
+}
+.section-box .sec-body { padding: 10px 12px; }
+
+/* 文章正文 */
+.article-body { font-size: 13.5px; line-height: 1.75; }
+.article-body p { margin: 8px 0; }
+.article-body h1, .article-body h2, .article-body h3 { color: #000080; }
+.article-body ul, .article-body ol { margin: 6px 0 6px 26px; padding: 0; }
+.article-body pre {
+  background: #EEEEEE;
+  border: 1px solid #808080;
+  padding: 8px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  overflow-x: auto;
+}
+.article-body code {
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  background: #EEEEEE;
+  border: 1px solid #CCCCCC;
+  padding: 0 2px;
+}
+.article-body blockquote {
+  margin: 8px 0 8px 16px;
+  padding: 4px 12px;
+  border-left: 4px solid #808080;
+  background: #F5F5F5;
+  color: #333333;
+}
+.placeholder-note {
+  border: 1px dashed #999999;
+  background: #F7F7F7;
+  color: #666666;
+  padding: 14px;
+  text-align: center;
+  font-size: 13px;
+}
+
+/* ---------- 图库 ---------- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 6px;
+}
+.gallery figure {
+  margin: 0;
+  border: 1px solid #808080;
+  background: #FFFFFF;
+  padding: 5px;
+  text-align: center;
+}
+.gallery img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border: 1px solid #000000;
+  cursor: zoom-in;
+  background: #000000;
+}
+.gallery figcaption {
+  font-size: 11px;
+  color: #333333;
+  margin-top: 4px;
+}
+
+/* 灯箱（点击看大图） */
+#lightbox {
+  display: none;
+  position: fixed;
+  left: 0; top: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.85);
+  z-index: 999;
+  text-align: center;
+  overflow: auto;
+  padding: 30px 20px;
+  cursor: zoom-out;
+}
+#lightbox.show { display: block; }
+#lightbox img {
+  max-width: 94%;
+  max-height: 86vh;
+  border: 4px solid #FFFFFF;
+  background: #FFFFFF;
+}
+#lightbox .lb-caption {
+  color: #FFFFFF;
+  margin-top: 10px;
+  font-size: 13px;
+  font-family: "SimSun", "宋体", "NSimSun", "Times New Roman", serif;
+}
+
+/* 上一台 / 下一台 */
+.prevnext {
+  margin: 18px 0 4px 0;
+  text-align: center;
+  font-size: 13px;
+}
+.prevnext a {
+  display: inline-block;
+  margin: 0 6px;
+  padding: 3px 14px;
+  border: 2px outset #FFFFFF;
+  border-top-color: #808080;
+  border-left-color: #808080;
+  background: #D4D0C8;
+  text-decoration: none;
+  color: #000000;
+}
+.prevnext a:hover { background: #FFFFCC; border-style: inset; color: #000080; }
+
+/* ---------- 统计 / 页脚 ---------- */
+.stats-line {
+  font-size: 12px;
+  color: #333333;
+  margin: 10px 0 2px 0;
+  font-family: "Courier New", monospace;
+}
+#footer {
+  background: #D4D0C8;
+  border-top: 2px solid #808080;
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 12px;
+  color: #333333;
+}
+#footer .foot-nav a { margin: 0 6px; }
+.ticker {
+  font-size: 12px;
+  color: #000080;
+  background: #FFFFCC;
+  border: 1px solid #CCCC99;
+  padding: 3px 6px;
+  margin-top: 8px;
+}
+
+/* ---------- 类别筛选 / 入口按钮 ---------- */
+.filter-bar { margin: 6px 0 12px 0; }
+.filter-btn {
+  display: inline-block;
+  margin: 2px 4px 2px 0;
+  padding: 3px 10px;
+  border: 2px outset #FFFFFF;
+  border-top-color: #808080;
+  border-left-color: #808080;
+  background: #D4D0C8;
+  color: #000000;
+  text-decoration: none;
+  font-size: 12px;
+  font-family: "SimSun", "宋体", "NSimSun", "Times New Roman", serif;
+}
+.filter-btn:hover { background: #FFFFCC; border-style: inset; color: #000080; }
+.filter-btn.filter-on {
+  background: linear-gradient(180deg, #6FB0FF 0%, #2E6FE0 45%, #0A48B0 55%, #0F55C8 100%);
+  color: #FFFFFF;
+  border: 1px solid #0A48C8;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.filter-n { color: #666666; }
+.filter-on .filter-n { color: #FFFF66; }
+.card-cat { font-size: 11px; color: #0000CC; margin-top: 2px; }
+.enter-btn {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 6px 22px;
+  border: 1px solid #0A48C8;
+  border-radius: 8px;                /* Aqua 玻璃圆角按钮 */
+  background: linear-gradient(180deg, #7AB6FF 0%, #3B82F6 40%, #1D5FE0 60%, #0A48C8 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), 0 2px 4px rgba(0,0,0,0.3);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "SimSun", "宋体", "NSimSun", "Times New Roman", serif;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+}
+.enter-btn:hover { background: linear-gradient(180deg, #8EC4FF 0%, #4D90FF 40%, #2E6FE0 60%, #1254D8 100%); }
+/* visited 状态保持白字，避免浏览器紫色 visited 色盖过按钮底色 */
+.enter-btn:visited { color: #FFFFFF; }
+/* 白色未激活按钮（低调入口，不做强调） */
+.enter-btn.enter-inactive {
+  background: linear-gradient(180deg, #9FB8E0 0%, #6B86B8 40%, #4A6396 60%, #40588C 100%);
+  color: #FFFFFF;
+  border: 1px solid #40588C;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.enter-btn.enter-inactive:hover {
+  background: linear-gradient(180deg, #ADC4E6 0%, #7C97C6 40%, #5A74A8 60%, #4E689C 100%);
+  border-style: none;
+}
+
+/* ---------- 维护说明页 ---------- */
+.code-block {
+  background: #F0F0F0;
+  border: 1px solid #808080;
+  padding: 8px 12px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  margin: 6px 0;
+}
+ul.plain { margin: 6px 0 6px 24px; padding: 0; }
+ul.plain li { margin: 3px 0; }
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 720px) {
+  #page { width: 100%; max-width: 100%; }
+  #content { margin: 8px 6px; padding: 10px 8px; }
+  .infotable th { width: 90px; }
+  #banner .counter { float: none; display: inline-block; margin-top: 6px; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+}
